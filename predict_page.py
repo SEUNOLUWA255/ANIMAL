@@ -88,6 +88,10 @@ def show_predict_page():
     prognosis_list_goat= ['foot and mouth', 'anthrax', 'lumpy virus', 'pneumonia',
        'blackleg']
     
+    
+
+    ok = st.button("Predict Disease in Livestock")
+
     data = load_model(f'xgmodel{livestock}.pkl')
 
     le_symptom1 = data["le_symptom1"]
@@ -95,8 +99,6 @@ def show_predict_page():
     le_symptom3 = data["le_symptom2"]
     regressor = data["xgmodel"]
     label_encoder =data["label_encoder"]
-
-    ok = st.button("Predict Disease in Livestock")
     if ok:
         x=np.array([[age,Temperature,First_Symptoms,Second_Symptoms ,Third_Symptoms]])
         x[:, 2] = le_symptom1.transform(x[:,2])
